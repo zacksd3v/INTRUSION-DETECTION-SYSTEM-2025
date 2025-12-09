@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
+        <h3>Don't Have an Account! Sign Up here</h3>
+        <h3 class="btn btn-dangr" style="color: red;">{{ message }}</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="inputBox">
+                 <input type="text" name="fname" placeholder="First Name">
+                 <input type="text" name="lname" placeholder="Last Name"> 
+                 <input type="text" name="username" placeholder="UserName"> 
+                 <input type="text" name="email" placeholder="Email"> 
+                 <input type="password" name="password", placeholder="Password">
+            </div> 
+                <input type="submit" value="Login">
+        </form> 
+        <a href="#">Forget Password<br> </a>
+        <div class="text-center">
+            <p style="color: #e9e1f1;"><a href="{% url 'login' %}">Login</a></p>
+        </div>
+        
+    </div>
+</body>
+</html>
