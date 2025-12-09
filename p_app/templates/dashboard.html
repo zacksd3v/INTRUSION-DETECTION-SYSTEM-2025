@@ -82,6 +82,11 @@
 <h1>INTRUSION DETECTION SYSTEM 2025</h1>
 
 </nav>
+<div style="display: flex; justify-content: end; font-size: x-large; margin-right: 10px; align-items: end;">
+    <div class="btn btn-info" style="margin: 10px;">Predict</div>
+    <div class="btn btn-info" style="margin: 10px;"><input type="file" name="" id="" value="Upload"></div>
+    <div class="btn btn-info" style="margin: 10px;">Logout</div>
+</div>
 <div class="f-all">
     <div class="cont">
     <form class="row g-3">
@@ -175,28 +180,43 @@
             <input type="text" class="form-control" id="inputZip" placeholder="1 if the login is a ``guest''login; 0 otherwise">
         </div>
         <div class="col-md-6">
-            <label for="inputEmail4" class="form-label">Hot</label>
-            <input type="email  " class="form-control" id="inputEmail4" placeholder="number of ``hot'' indicators">
+            <label for="inputEmail4" class="form-label">Count</label>
+            <input type="email  " class="form-control" id="inputEmail4" placeholder="number of connections to the same host in 2sec">
         </div>
         <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Num_failed_logins</label>
-            <input type="email" class="form-control" id="inputPassword4" placeholder="number of failed login attempts">
+            <label for="inputPassword4" class="form-label">Serror_rate</label>
+            <input type="email" class="form-control" id="inputPassword4" placeholder="% of connections that have ``SYN'' errors">
         </div>
         <div class="col-12">
-            <label for="inputAddress" class="form-label">Logged_in</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="number of ``compromised'' conditions">
+            <label for="inputAddress" class="form-label">Rerror_rate</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="% of connections that have ``REJ'' errors">
         </div>
         <div class="col-12">
-            <label for="inputAddress2" class="form-label">Root_shell</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="1 if root shell is obtained; 0 otherwise">
+            <label for="inputAddress2" class="form-label">Same_srv_rate</label>
+            <input type="text" class="form-control" id="inputAddress2" placeholder="% of connections to the same service">
         </div>
         <div class="col-md-6">
-            <label for="inputCity" class="form-label">Su_attempted</label>
-            <input type="text" class="form-control" id="inputCity" placeholder="1 if ``su root'' command attempted; 0 otherwise	">
+            <label for="inputCity" class="form-label">Diff_srv_rate</label>
+            <input type="text" class="form-control" id="inputCity" placeholder="% of connections to different services">
         </div>
         <div class="col-md-6">
-            <label for="inputState" class="form-label">Num_root</label>
-            <input type="text" class="form-control" id="inputCity" placeholder="number of ``root'' accesses">
+            <label for="inputState" class="form-label">Srv_count</label>
+            <input type="text" class="form-control" id="inputCity" placeholder="number of connections to the same service">
+        </div>
+        <div class="col-md-6">
+            <label for="inputCity" class="form-label">Srv_serror_rate</label>
+            <input type="text" class="form-control" id="inputCity" placeholder="% of connections that have ``SYN'' errors">
+        </div>
+        <div class="col-md-6">
+            <label for="inputState" class="form-label">Srv_rerror_rate</label>
+            <input type="text" class="form-control" id="inputCity" placeholder="number of connections to the same service">
+        </div>
+        <div class="col-12">
+            <label for="inputState" class="form-label">Srv_diff_host_rate</label>
+            <input type="text" class="form-control" id="inputCity" placeholder="% of connections to different hosts">
+        </div>
+        <div class="col-12">
+            <input type="submit" class="form-control btn btn-danger mt-3" id="inputCity" value="Check Packet">
         </div>
     </form>
     </div>
