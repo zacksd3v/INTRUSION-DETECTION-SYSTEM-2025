@@ -13,19 +13,19 @@
 <body>
     <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
         <h3>Don't Have an Account! Sign Up here</h3>
-        <h3 class="btn btn-dangr" style="color: red;">{% sweetify %}</h3>
+        {% sweetify %}
         <form method="post">
             {% csrf_token %}
             <div class="inputBox">
-                 <input type="text" name="fname" placeholder="First Name">
-                 <input type="text" name="lname" placeholder="Last Name"> 
-                 <input type="text" name="username" placeholder="UserName"> 
-                 <input type="text" name="email" placeholder="Email"> 
-                 <input type="password" name="password", placeholder="Password">
+                 <input type="text" name="fname" placeholder="First Name" required>
+                 <input type="text" name="lname" placeholder="Last Name" required> 
+                 <input type="text" name="username" placeholder="UserName" required> 
+                 <input type="text" name="email" placeholder="Email" required> 
+                 <input type="password" name="password", placeholder="Password" required>
             </div> 
                 <input type="submit" value="Login">
         </form> 
-        <a href="#">Forget Password<br> </a>
+        <a href="{% url 'forget_password' %}">Forget Password<br> </a>
         <div class="text-center">
             <p style="color: #e9e1f1;"><a href="{% url 'login' %}">Login</a></p>
         </div>

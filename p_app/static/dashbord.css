@@ -1,0 +1,64 @@
+ body {
+            font-size: 16px;
+            color: #22A7F0;
+            margin-bottom: 100px;
+            background-color: #0D1117;
+            font-family: 'Consolas', 'Monospace', sans-serif;
+        }
+
+        form {
+            width: 80%;
+            padding: 20px;
+            box-shadow: 0px 4px 8px 0px rgba(12, 147, 226, 0.3);
+        }
+
+        .f-all {
+            display: flex;
+        }
+
+        .cont {
+               display: flex;
+               margin-top: 5rem;
+               justify-content: center; 
+        }
+
+        img {
+            height: 200px;
+            margin-left: 10px;
+            border-radius: 50px;
+        }
+
+        h1 {
+            color: #22A7F0; /* Use the electric blue accent */
+            padding-bottom: 5px;
+            margin-right: 78rem;
+            border-bottom: 2px solid #22A7F0;
+        }
+
+        input[type="text"], [type="password"] {
+        background-color: #0D1117; /* Very dark background */
+        color: #00FFC0; /* Neon/Electric Green Text */
+        caret-color: #00FFC0; /* Make the cursor glow */
+
+        /* 2. Sizing and Appearance */
+        /* width: 300px; */
+        padding: 10px 15px;
+        border: 1px solid #005544; /* Darker border color */
+        border-radius: 4px;
+        font-family: 'Consolas', monospace; /* Techy font */
+        transition: all 0.3s ease-in-out; /* Smooth transition for the glow */
+}
+
+    input[type="text"]:focus {
+        outline: none; 
+        box-shadow: 
+        /* 1st Shadow: Inner, sharp glow */
+        0 0 5px rgba(0, 255, 192, 0.5), 
+        /* 2nd Shadow: Outer, wider glow */
+        0 0 15px rgba(0, 255, 192, 0.4),
+        /* 3rd Shadow: Deeper, wider diffusion */
+        0 0 25px rgba(0, 255, 192, 0.3);
+
+    /* Slightly brighten the border on focus */
+       border-color: #00FFC0; 
+}

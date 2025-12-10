@@ -1,8 +1,12 @@
 import sweetify
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
+# import joblib
+# import numpy as np
+# from .forms import NidsForm
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.forms import AuthenticationForm
 
 def register(req):
 
@@ -14,12 +18,12 @@ def register(req):
         password = req.POST.get('password')
 
         if User.objects.filter(username=username).exists():
-            sweetify.error(req, 'Username already taken', button='OK')
+            sweetify.toast(req, 'Username already taken', icon='warning')
         elif User.objects.filter(email=email).exists():
-            sweetify.error(req, 'Email already exist!', button='OK')
+            sweetify.toast(req, 'Email already exist!', icon='warning')
 
         else:
-            User.objects.create(
+            User.objects.create_user(
                 first_name=first_name,
                 last_name=last_name,
                 username=username,
@@ -28,14 +32,14 @@ def register(req):
 
             )
 
-            sweetify.success(req, 'Registration Successfully!', button='Ok')
+            sweetify.toast(req, 'Registration Successfully!', icon='success')
 
             return redirect('login')
 
     return render(req, 'register.html')
 
 
-def login(req):
+def login_user(req):
 
     if req.method == 'POST':
         username = req.POST.get('username')
@@ -45,15 +49,63 @@ def login(req):
 
         if user is not None:
             login(req, user)
-            return redirect('dashboard.html')
+            sweetify.toast(req, 'Login Successfully!', icon='success')
+            # return render(req, 'dashboard.html')
+            return redirect('dashboard')
         else:
-            sweetify.error(req, 'Invalid Username | Password!', button='OK')
+            sweetify.toast(req, 'Invalid Username | Password!', icon='warning')
 
 
     return render(req, 'login.html')
 
 
-# @login_required
+@login_required
 def dashboard(req):
-    sweetify.success(req, 'Welcome To NIDS 2025', button='OK')
+    sweetify.toast(req, 'Welcome To NIDS 2025', icon='success')
     return render(req, 'dashboard.html')
+    
+    # prediction = None
+
+    # if req.method == 'POST':
+    #     form = NidsForm(req.POST)
+
+    #     if form.is_valid():
+    #         data = list(form.cleaned_data.values()) # convert to array
+    #         data = np.array(data).reshape(1, -1)
+
+    #         # model prediction
+    #         result = model.predict(data)[0]
+
+    #         if result == 0:
+    #             prediction = sweetify.success(req, 'NORMAL TRAFFIC', button='OK')
+    #         else:
+    #             prediction = sweetify.warning(req, 'INTRUSION DETECTED!!', button='OK')
+
+    # else:
+    #     form = NidsForm()
+
+    # sweetify.toast(req, 'Welcome To NIDS 2025', icon='success')
+    # return render(req, 'dashboard.html', {
+    #     "form": form,
+    #     "prediction": prediction,
+    # })
+
+
+def forget(req):
+
+    if req.method == 'POST':
+        update_psswd = req.POST.get('update')
+
+        if update_psswd == req.POST.get('update'):
+            sweetify.toast(req, 'Password Updated Successfully!', icon='success')
+            return render(req, 'login.html')
+        else:
+            sweetify.toast(req, 'Unable To Update Password!', icon='warning')
+            return render(req, 'forget.html')
+
+    return render(req, 'forget.html')
+
+def logout_view(request):
+    logout(request)
+    sweetify.toast(request, "You have been logged out.", icon='warning')
+    return redirect("login")
