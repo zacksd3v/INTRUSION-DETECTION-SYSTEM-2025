@@ -10,7 +10,7 @@
 <body>
     <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
         <h3>Sign in here</h3>
-        <h3 class="btn btn-dangr" style="color: red;">{{ message }}</h3>
+        <h3 class="btn btn-dangr" style="color: red;">{% sweetify %}</h3>
         <form method="post">
             {% csrf_token %}
             <div class="inputBox">

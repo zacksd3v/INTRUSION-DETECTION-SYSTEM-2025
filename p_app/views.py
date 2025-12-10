@@ -1,10 +1,10 @@
+import sweetify
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 def register(req):
-    message = ''
 
     if req.method == 'POST':
         first_name = req.POST.get('fname')
@@ -14,9 +14,10 @@ def register(req):
         password = req.POST.get('password')
 
         if User.objects.filter(username=username).exists():
-            message = 'Username already taken'
+            sweetify.error(req, 'Username already taken', button='OK')
         elif User.objects.filter(email=email).exists():
-            message = 'Email already exist!'
+            sweetify.error(req, 'Email already exist!', button='OK')
+
         else:
             User.objects.create(
                 first_name=first_name,
@@ -27,13 +28,14 @@ def register(req):
 
             )
 
+            sweetify.success(req, 'Registration Successfully!', button='Ok')
+
             return redirect('login')
 
-    return render(req, 'register.html', {'message':message})
+    return render(req, 'register.html')
 
 
 def login(req):
-    message = ''
 
     if req.method == 'POST':
         username = req.POST.get('username')
@@ -45,12 +47,13 @@ def login(req):
             login(req, user)
             return redirect('dashboard.html')
         else:
-            message = 'Invalid username | password!'
+            sweetify.error(req, 'Invalid Username | Password!', button='OK')
 
 
-    return render(req, 'login.html', {'message':message})
+    return render(req, 'login.html')
 
 
 # @login_required
 def dashboard(req):
+    sweetify.success(req, 'Welcome To NIDS 2025', button='OK')
     return render(req, 'dashboard.html')

@@ -1,4 +1,5 @@
 {% load static %}
+{% load sweetify %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +8,12 @@
     <title>Register</title>
     <link rel="stylesheet" href="{% static 'index.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
     <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
         <h3>Don't Have an Account! Sign Up here</h3>
-        <h3 class="btn btn-dangr" style="color: red;">{{ message }}</h3>
+        <h3 class="btn btn-dangr" style="color: red;">{% sweetify %}</h3>
         <form method="post">
             {% csrf_token %}
             <div class="inputBox">
