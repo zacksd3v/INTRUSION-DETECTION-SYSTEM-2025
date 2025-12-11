@@ -10,5 +10,6 @@ urlpatterns = [
     path("result/", views.result, name="result"),
     # path('upload', views.upload, name='upload'),
     path("upload_csv/", views.upload_csv, name="upload_csv"),
+    path("uploaded_result/", views.uploaded_result, name="uploaded_result"),
 
 ]

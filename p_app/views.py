@@ -207,9 +207,14 @@ def upload_csv(request):
         output_path = "predicted_output.csv"
         df.to_csv(output_path, index=False)
 
-        return render(request, "upload_result.html", {
+        return render(request, "uploaded_result.html", {
             "table": df.to_html(classes="table table-dark table-striped"),
             "download": output_path
         })
 
     return render(request, "upload.html")
+
+
+def uploaded_result(req):
+    sweetify.toast(req, 'Uploaded Successfully!', icon='success')
+    return render(req, 'uploaded_result.html    ')
