@@ -8,4 +8,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('forget_password/', views.forget, name='forget_password'),
     path("result/", views.result, name="result"),
+    # path('upload', views.upload, name='upload'),
+    path("upload_csv/", views.upload_csv, name="upload_csv"),
+
 ]

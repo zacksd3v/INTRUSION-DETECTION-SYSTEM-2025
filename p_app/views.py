@@ -1,7 +1,7 @@
 import sweetify
 import joblib
 import numpy as np
-# from .forms import NidsForm
+import pandas as pd
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -156,3 +156,60 @@ def dashboard(request):
 def result(req):
     sweetify.toast(req, 'Predicted Successfully!', icon='success')
     return render(req, 'result.html')
+
+
+def upload_csv(request):
+    sweetify.toast(request, 'Caution! Upload Only CSV File!', icon='warning')
+
+    if request.method == "POST":
+        csv_file = request.FILES["csv_file"]
+
+        # Read CSV
+        df = pd.read_csv(csv_file)
+
+        # Ensure columns match model
+        required_cols = [
+            "duration","protocol_type","service","flag","src_bytes","dst_bytes","land",
+            "wrong_fragment","urgent","hot","num_failed_logins","logged_in",
+            "num_compromised","root_shell","su_attempted","num_root","num_file_creations",
+            "num_shells","num_access_files","num_outbound_cmds","is_hot_login",
+            "is_guest_login","count","srv_count","serror_rate","srv_serror_rate",
+            "rerror_rate","srv_rerror_rate","same_srv_rate","diff_srv_rate",
+            "srv_diff_host_rate","dst_host_count","dst_host_srv_count",
+            "dst_host_same_srv_rate","dst_host_diff_srv_rate",
+            "dst_host_same_src_port_rate","dst_host_srv_diff_host_rate",
+            "dst_host_serror_rate","dst_host_srv_serror_rate",
+            "dst_host_rerror_rate","dst_host_srv_rerror_rate"
+        ]
+
+        # Verify columns exist
+        for col in required_cols:
+            if col not in df.columns:
+                return render(request, "upload_result.html", {
+                    "error": f"Missing column: {col}"
+                })
+
+        # Encode categorical fields
+        df["protocol_type"] = encoders["protocol_type"].transform(df["protocol_type"])
+        df["service"]       = encoders["service"].transform(df["service"])
+        df["flag"]          = encoders["flag"].transform(df["flag"])
+
+        # Prepare data
+        X = df[required_cols].values
+
+        # Predict
+        predictions = model.predict(X)
+        decoded = encoders["attack"].inverse_transform(predictions)
+
+        df["prediction"] = decoded
+
+        # Save to a downloadable CSV
+        output_path = "predicted_output.csv"
+        df.to_csv(output_path, index=False)
+
+        return render(request, "upload_result.html", {
+            "table": df.to_html(classes="table table-dark table-striped"),
+            "download": output_path
+        })
+
+    return render(request, "upload.html")

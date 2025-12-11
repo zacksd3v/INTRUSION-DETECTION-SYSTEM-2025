@@ -5,11 +5,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prediction Result</title>
+    <title>Upload CSV Here</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'result.css' %}">
     <link rel="icon" type="image/x-icon" href="../static/new.jpg">
+
+    <style>
+
+        form {
+            padding: 20px;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+            transform: scale(1.05); 
+            background-color: #15756d;
+            transition: transform 0.2s ease;
+        }
+    </style>
 
 </head>
 <body>
@@ -21,18 +35,16 @@
     <h1 class="m">INTRUSION DETECTION SYSTEM 2025</h1>
 
     </nav>
-    {% if result == "normal" %}
+
         <div class="result-box safe-box">
-            <h1>✔ NORMAL TRAFFIC</h1>
-            <p style="font-size: 20px;">The connection appears safe. No malicious activity detected.</p>
+            <h1><i class="bi bi-upload"></i> UPLOAD CSV FILE HERE</h1>
+            <form action="{% url 'upload_csv' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="csv_file" class="form-control" required>
+                <button class="btn btn-info mt-2">Upload CSV</button>
+            </form>
+
         </div>
-    {% else %}
-        <div class="result-box attack-box">
-            <h1>⚠ ATTACK DETECTED</h1>
-            <p style="font-size: 22px;">Attack Type: <strong>{{ result|upper }}</strong></p>
-            <p style="font-size: 18px;">This traffic pattern matches a known intrusion signature.</p>
-        </div>
-    {% endif %}
 
     <div class="text-center">
         <a href="{% url 'dashboard' %}" class="btn btn-info btn-back">⬅ Back to Dashboard</a>

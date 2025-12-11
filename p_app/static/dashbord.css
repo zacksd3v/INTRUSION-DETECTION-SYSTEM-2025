@@ -35,13 +35,10 @@
             border-bottom: 2px solid #22A7F0;
         }
 
-        input[type="text"], [type="password"] {
-        background-color: #0D1117; /* Very dark background */
-        color: #00FFC0; /* Neon/Electric Green Text */
+        input[type="text"], [type="number"] {
+        background-color: #0D1117; 
+        color: #00FFC0;
         caret-color: #00FFC0; /* Make the cursor glow */
-
-        /* 2. Sizing and Appearance */
-        /* width: 300px; */
         padding: 10px 15px;
         border: 1px solid #005544; /* Darker border color */
         border-radius: 4px;

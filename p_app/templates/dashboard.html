@@ -22,7 +22,7 @@
 </nav>
 <div style="display: flex; justify-content: end; font-size: x-large; margin-right: 10px; align-items: end;">
     <div class="btn btn-info" style="margin: 10px;"><i class="bi bi-shield-check"></i> Predict</div>
-    <div class="btn btn-info" style="margin: 10px;"><i class="bi bi-upload"></i> <input type="file" name="" id="" value="Upload"></div>
+    <a href="{% url 'upload' %}"><div class="btn btn-info" style="margin: 10px;"><i class="bi bi-upload"></i> Upload</div></a>
     <a href="{% url  'logout' %}"><div class="btn btn-info" style="margin: 10px;"><i class="bi bi-box-arrow-right"></i> Logout</div></a>
 </div>
 {% sweetify %}
@@ -31,11 +31,11 @@
             <form class="row g-4">
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Package Size</label>
-                    <input type="email  " class="form-control" id="inputEmail4" placeholder="0 / 1" required>
+                    <input type="number" class="form-control" id="inputEmail4" placeholder="0 / 1" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label">Protocol_in_null</label>
-                    <input type="email" class="form-control" id="inputPassword4" placeholder="TCP, UDP" required>
+                    <input type="number" class="form-control" id="inputPassword4" placeholder="TCP, UDP" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputAddress" class="form-label">Netsh_num</label>
@@ -55,11 +55,11 @@
                 </div>
                 <div class="col-md-6">
                     <label for="inputZip" class="form-label">Packs</label>
-                    <input type="text" class="form-control" id="inputZip" placeholder="0-1" required>
+                    <input type="number" class="form-control" id="inputZip" placeholder="0-1" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputZip" class="form-label">Wrong_dst</label>
-                    <input type="text" class="form-control" id="inputZip" placeholder="e.g 1234" required>
+                    <input type="number" class="form-control" id="inputZip" placeholder="e.g 1234" required>
                 </div>
                 <div class="col-12">
                     <label for="inputZip" class="form-label">Rush</label>
@@ -72,11 +72,11 @@
             <form class="row g-3" method="post">
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Duration</label>
-                    <input type="email  " class="form-control" name="duration" id="inputEmail4" placeholder="length (number of seconds) of the connection" required>
+                    <input type="number" class="form-control" name="duration" id="inputEmail4" placeholder="length (number of seconds) of the connection" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label">Protocol_type</label>
-                    <input type="email" name="protocol_type" class="form-control" id="inputPassword4" placeholder="type of the protocol, e.g, TCP, UDP" required>
+                    <input type="number" name="protocol_type" class="form-control" id="inputPassword4" placeholder="type of the protocol, e.g, TCP, UDP" required>
                 </div>
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Service</label>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-12">
                     <label for="inputAddress2" class="form-label">Src_bytes</label>
-                    <input type="text" name="src_bytes" class="form-control" id="inputAddress2" placeholder="number of data bytes from source to destination" required>
+                    <input type="number" name="src_bytes" class="form-control" id="inputAddress2" placeholder="number of data bytes from source to destination" required>
                 </div>
                 <div class="col-12">
                     <label for="inputCity" class="form-label">Dst_bytes</label>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-12">
                     <label for="inputState" class="form-label">Flag</label>
-                    <input type="text" name="flag" class="form-control" id="inputCity" placeholder="normal or error status of the connection" required>
+                    <input type="number" name="flag" class="form-control" id="inputCity" placeholder="normal or error status of the connection" required>
                 </div>
                 <div class="col-12">
                     <label for="inputZip" class="form-label">Land</label>
@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-12">
                     <label for="inputZip" class="form-label">Wrong_fragment</label>
-                    <input type="text" name="wrong_fragment" class="form-control" id="inputZip" placeholder="number of ``wrong'' fragments" required>
+                    <input type="number" name="wrong_fragment" class="form-control" id="inputZip" placeholder="number of ``wrong'' fragments" required>
                 </div>
                 <div class="col-12">
                     <label for="inputZip" class="form-label">Ugent</label>
@@ -108,11 +108,11 @@
                 </div>
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Hot</label>
-                    <input type="email" name="hot" class="form-control" id="inputEmail4" placeholder="number of ``hot'' indicators" required>
+                    <input type="number" name="hot" class="form-control" id="inputEmail4" placeholder="number of ``hot'' indicators" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label">Num_failed_logins</label>
-                    <input type="email" name="num_failed_logins" class="form-control" id="inputPassword4" placeholder="number of failed login attempts" required>
+                    <input type="number" name="num_failed_logins" class="form-control" id="inputPassword4" placeholder="number of failed login attempts" required>
                 </div>
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Logged_in</label>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="col-12">
                     <label for="inputAddress2" class="form-label">Root_shell</label>
-                    <input type="text" name="root_shell" class="form-control" id="inputAddress2" placeholder="1 if root shell is obtained; 0 otherwise" required>
+                    <input type="number" name="root_shell" class="form-control" id="inputAddress2" placeholder="1 if root shell is obtained; 0 otherwise" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">Su_attempted</label>
@@ -132,35 +132,35 @@
                 </div>
                 <div class="col-md-4">
                     <label for="inputZip" class="form-label">Num_file_creations</label>
-                    <input type="text" name="num_file_creations" class="form-control" id="inputZip" placeholder="number of file creation operations" required>
+                    <input type="number" name="num_file_creations" class="form-control" id="inputZip" placeholder="number of file creation operations" required>
                 </div>
                 <div class="col-md-4">
                     <label for="inputZip" class="form-label">Num_shells</label>
-                    <input type="text" name="num_shells" class="form-control" id="inputZip" placeholder="number of shell prompts" required>
+                    <input type="number" name="num_shells" class="form-control" id="inputZip" placeholder="number of shell prompts" required>
                 </div>
                 <div class="col-md-4">
                     <label for="inputZip" class="form-label">Num_access_files</label>
-                    <input type="text" name="num_access_files" class="form-control" id="inputZip" placeholder="number of files access" required>
+                    <input type="number" name="num_access_files" class="form-control" id="inputZip" placeholder="number of files access" required>
                 </div>
                 <div class="col-md-4">
                     <label for="inputZip" class="form-label">Num_outbound_cmds</label>
-                    <input type="text" name="num_outbound_cmds" class="form-control" id="inputZip" placeholder="number of outbound commands in an ftp session" required>
+                    <input type="number" name="num_outbound_cmds" class="form-control" id="inputZip" placeholder="number of outbound commands in an ftp session" required>
                 </div>
                 <div class="col-md-4">
                     <label for="inputZip" class="form-label">Is_hot_login</label>
-                    <input type="text" name="is_hot_login" class="form-control" id="inputZip" placeholder="1 if the login belongs to the ``hot'' list; 0 otherwise" required>
+                    <input type="number" name="is_hot_login" class="form-control" id="inputZip" placeholder="1 if the login belongs to the ``hot'' list; 0 otherwise" required>
                 </div>
                 <div class="col-md-4">
                     <label for="inputZip" class="form-label">Is_guest_login</label>
-                    <input type="text" name="is_guest_login" class="form-control" id="inputZip" placeholder="1 if the login is a ``guest''login; 0 otherwise" required>
+                    <input type="number" name="is_guest_login" class="form-control" id="inputZip" placeholder="1 if the login is a ``guest''login; 0 otherwise" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Count</label>
-                    <input type="email" name="count" class="form-control" id="inputEmail4" placeholder="number of connections to the same host in 2sec" required>
+                    <input type="number" name="count" class="form-control" id="inputEmail4" placeholder="number of connections to the same host in 2sec" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label">Serror_rate</label>
-                    <input type="email" name="serror_rate" class="form-control" id="inputPassword4" placeholder="% of connections that have ``SYN'' errors" required>
+                    <input type="number" name="serror_rate" class="form-control" id="inputPassword4" placeholder="% of connections that have ``SYN'' errors" required>
                 </div>
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Rerror_rate</label>
@@ -168,23 +168,23 @@
                 </div>
                 <div class="col-12">
                     <label for="inputAddress2" class="form-label">Same_srv_rate</label>
-                    <input type="text" name="same_srv_rate" class="form-control" id="inputAddress2" placeholder="% of connections to the same service" required>
+                    <input type="number" name="same_srv_rate" class="form-control" id="inputAddress2" placeholder="% of connections to the same service" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">Diff_srv_rate</label>
-                    <input type="text" name="diff_srv_rate" class="form-control" id="inputCity" placeholder="% of connections to different services" required>
+                    <input type="number" name="diff_srv_rate" class="form-control" id="inputCity" placeholder="% of connections to different services" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputState" class="form-label">Srv_count</label>
-                    <input type="text" name="srv_count" class="form-control" id="inputCity" placeholder="number of connections to the same service" required>
+                    <input type="number" name="srv_count" class="form-control" id="inputCity" placeholder="number of connections to the same service" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">Srv_serror_rate</label>
-                    <input type="text" name="srv_serror_rate" class="form-control" id="inputCity" placeholder="% of connections that have ``SYN'' errors" required>
+                    <input type="number" name="srv_serror_rate" class="form-control" id="inputCity" placeholder="% of connections that have ``SYN'' errors" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputState" class="form-label">Srv_rerror_rate</label>
-                    <input type="text" name="srv_rerror_rate" class="form-control" id="inputCity" placeholder="number of connections to the same service" required>
+                    <input type="number" name="srv_rerror_rate" class="form-control" id="inputCity" placeholder="number of connections to the same service" required>
                 </div>
                 <div class="col-12">
                     <label for="inputState" class="form-label">Srv_diff_host_rate</label>
@@ -192,7 +192,7 @@
                 </div>
                 <div class="col-12">
                     <!-- <input > -->
-                    <button type="submit" class="form-control btn btn-danger mt-3" id="inputCity" value="Check Packet">
+                    <button type="submit" class="form-control btn btn-danger mt-3" id="inputCity" value="Check Packet" aria-required="true">
                         <i class="bi bi-shield-check"></i> Check Packet
                     </button>
                 </div>
