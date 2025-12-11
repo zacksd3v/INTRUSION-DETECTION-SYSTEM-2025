@@ -57,36 +57,11 @@ def login_user(req):
     return render(req, 'login.html')
 
 
-@login_required
-def dashboard(req):
-    sweetify.toast(req, 'Welcome To NIDS 2025', icon='success')
-    return render(req, 'dashboard.html')
+# @login_required
+# def dashboard(req):
+#     sweetify.toast(req, 'Welcome To NIDS 2025', icon='success')
+#     return render(req, 'dashboard.html')
     
-    # prediction = None
-
-    # if req.method == 'POST':
-    #     form = NidsForm(req.POST)
-
-    #     if form.is_valid():
-    #         data = list(form.cleaned_data.values()) # convert to array
-    #         data = np.array(data).reshape(1, -1)
-
-    #         # model prediction
-    #         result = model.predict(data)[0]
-
-    #         if result == 0:
-    #             prediction = sweetify.success(req, 'NORMAL TRAFFIC', button='OK')
-    #         else:
-    #             prediction = sweetify.warning(req, 'INTRUSION DETECTED!!', button='OK')
-
-    # else:
-    #     form = NidsForm()
-
-    # sweetify.toast(req, 'Welcome To NIDS 2025', icon='success')
-    # return render(req, 'dashboard.html', {
-    #     "form": form,
-    #     "prediction": prediction,
-    # })
 
 
 def forget(req):
@@ -113,7 +88,8 @@ def logout_view(request):
 model = joblib.load("model.pkl")
 encoders = joblib.load("encoders.pkl")
 
-def predict_attack(request):
+# @login_required
+def dashboard(request):
     if request.method == "POST":
         # Collect ALL 41 features from your form
         # (same order as the dataset)
@@ -172,4 +148,11 @@ def predict_attack(request):
 
         return render(request, "result.html", {"result": attack_label})
 
-    return render(request, "form.html")
+    sweetify.toast(request, 'Welcome To NIDS 2025', icon='success')
+    return render(request, "dashboard.html")
+
+
+
+def result(req):
+    sweetify.toast(req, 'Predicted Successfully!', icon='success')
+    return render(req, 'result.html')

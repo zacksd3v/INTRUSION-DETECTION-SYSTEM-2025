@@ -1,3 +1,5 @@
 django
 numpy
 sweetify
+numpy
+joblib
