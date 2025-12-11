@@ -1,12 +1,11 @@
 import sweetify
-# import joblib
-# import numpy as np
+import joblib
+import numpy as np
 # from .forms import NidsForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.forms import AuthenticationForm
 
 def register(req):
 
@@ -50,7 +49,6 @@ def login_user(req):
         if user is not None:
             login(req, user)
             sweetify.toast(req, 'Login Successfully!', icon='success')
-            # return render(req, 'dashboard.html')
             return redirect('dashboard')
         else:
             sweetify.toast(req, 'Invalid Username | Password!', icon='warning')
@@ -109,3 +107,69 @@ def logout_view(request):
     logout(request)
     sweetify.toast(request, "You have been logged out.", icon='warning')
     return redirect("login")
+
+
+# Load ML files once
+model = joblib.load("model.pkl")
+encoders = joblib.load("encoders.pkl")
+
+def predict_attack(request):
+    if request.method == "POST":
+        # Collect ALL 41 features from your form
+        # (same order as the dataset)
+        data = [
+            float(request.POST.get("duration")),
+            encoders["protocol_type"].transform([request.POST.get("protocol_type")])[0],
+            encoders["service"].transform([request.POST.get("service")])[0],
+            encoders["flag"].transform([request.POST.get("flag")])[0],
+            float(request.POST.get("src_bytes")),
+            float(request.POST.get("dst_bytes")),
+            float(request.POST.get("land")),
+            float(request.POST.get("wrong_fragment")),
+            float(request.POST.get("urgent")),
+            float(request.POST.get("hot")),
+            float(request.POST.get("num_failed_logins")),
+            float(request.POST.get("logged_in")),
+            float(request.POST.get("num_compromised")),
+            float(request.POST.get("root_shell")),
+            float(request.POST.get("su_attempted")),
+            float(request.POST.get("num_root")),
+            float(request.POST.get("num_file_creations")),
+            float(request.POST.get("num_shells")),
+            float(request.POST.get("num_access_files")),
+            float(request.POST.get("num_outbound_cmds")),
+            float(request.POST.get("is_hot_login")),
+            float(request.POST.get("is_guest_login")),
+            float(request.POST.get("count")),
+            float(request.POST.get("srv_count")),
+            float(request.POST.get("serror_rate")),
+            float(request.POST.get("srv_serror_rate")),
+            float(request.POST.get("rerror_rate")),
+            float(request.POST.get("srv_rerror_rate")),
+            float(request.POST.get("same_srv_rate")),
+            float(request.POST.get("diff_srv_rate")),
+            float(request.POST.get("srv_diff_host_rate")),
+            float(request.POST.get("dst_host_count")),
+            float(request.POST.get("dst_host_srv_count")),
+            float(request.POST.get("dst_host_same_srv_rate")),
+            float(request.POST.get("dst_host_diff_srv_rate")),
+            float(request.POST.get("dst_host_same_src_port_rate")),
+            float(request.POST.get("dst_host_srv_diff_host_rate")),
+            float(request.POST.get("dst_host_serror_rate")),
+            float(request.POST.get("dst_host_srv_serror_rate")),
+            float(request.POST.get("dst_host_rerror_rate")),
+            float(request.POST.get("dst_host_srv_rerror_rate")),
+        ]
+
+        # Convert to 2D array
+        data = np.array(data).reshape(1, -1)
+
+        # Predict
+        pred = model.predict(data)[0]
+
+        # Reverse-encode attack label
+        attack_label = encoders["attack"].inverse_transform([pred])[0]
+
+        return render(request, "result.html", {"result": attack_label})
+
+    return render(request, "form.html")
