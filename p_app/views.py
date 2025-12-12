@@ -202,10 +202,8 @@ def dashboard(request):
 
 
 def result(req):
-    random_attack = random.choice(ATTACK_TYPES)
-
     sweetify.toast(req, 'Predicted Successfully!', icon='success')
-    return render(req, 'result.html', {"attack": random_attack})
+    return render(req, 'result.html')
 
 
 def upload_csv(request):
