@@ -29,10 +29,18 @@
     {% else %}
         <div class="result-box attack-box">
             <h1>⚠ ATTACK DETECTED</h1>
-            <p style="font-size: 22px;">Attack Type: <strong>{{ result|upper }}</strong></p>
-            <p style="font-size: 18px;">This traffic pattern matches a known intrusion signature.</p>
+
+            <p style="font-size: 22px;">
+                Attack Type:
+                <strong>{{ attack|upper }}</strong>
+            </p>
+
+            <p style="font-size: 18px;">
+                This traffic pattern matches a known intrusion signature.
+            </p>
         </div>
     {% endif %}
+
 
     <div class="text-center">
         <a href="{% url 'dashboard' %}" class="btn btn-info btn-back">⬅ Back to Dashboard</a>

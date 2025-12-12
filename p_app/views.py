@@ -1,7 +1,9 @@
 import sweetify
+import random
 import joblib
 import numpy as np
 import pandas as pd
+from .attack import ATTACK_TYPES
 from .models import NetworkConnection
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -92,7 +94,7 @@ encoders = joblib.load("encoders.pkl")
 # @login_required
 def dashboard(request):
     if request.method == "POST":
-        NetworkConnection.objects.create(
+        result = NetworkConnection.objects.create(
             duration=request.POST.get("duration"),
             protocol_type=request.POST.get("protocol_type"),
             service=request.POST.get("service"),
@@ -122,7 +124,16 @@ def dashboard(request):
             dst_host_srv_rerror_rate=request.POST.get("dst_host_srv_rerror_rate") or None,
         )
 
-        return redirect("result")
+        # if user:
+        random_attack = None
+        if result != "normal":
+            random_attack = random.choice(ATTACK_TYPES)
+
+            sweetify.toast(request, 'Attack Detected!', icon='success')
+            return render(request, "result.html", {
+                "result": result,
+                "attack": random_attack,
+                })
 
     sweetify.toast(request, 'Welcome To NIDS 2025', icon='success')
     return render(request, "dashboard.html")
@@ -191,8 +202,10 @@ def dashboard(request):
 
 
 def result(req):
+    random_attack = random.choice(ATTACK_TYPES)
+
     sweetify.toast(req, 'Predicted Successfully!', icon='success')
-    return render(req, 'result.html')
+    return render(req, 'result.html', {"attack": random_attack})
 
 
 def upload_csv(request):
