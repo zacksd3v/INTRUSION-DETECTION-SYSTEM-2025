@@ -2,6 +2,7 @@ import sweetify
 import joblib
 import numpy as np
 import pandas as pd
+from .models import NetworkConnection
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -91,65 +92,101 @@ encoders = joblib.load("encoders.pkl")
 # @login_required
 def dashboard(request):
     if request.method == "POST":
-        # Collect ALL 41 features from your form
-        # (same order as the dataset)
-        data = [
-            float(request.POST.get("duration")),
-            encoders["protocol_type"].transform([request.POST.get("protocol_type")])[0],
-            encoders["service"].transform([request.POST.get("service")])[0],
-            encoders["flag"].transform([request.POST.get("flag")])[0],
-            float(request.POST.get("src_bytes")),
-            float(request.POST.get("dst_bytes")),
-            float(request.POST.get("land")),
-            float(request.POST.get("wrong_fragment")),
-            float(request.POST.get("urgent")),
-            float(request.POST.get("hot")),
-            float(request.POST.get("num_failed_logins")),
-            float(request.POST.get("logged_in")),
-            float(request.POST.get("num_compromised")),
-            float(request.POST.get("root_shell")),
-            float(request.POST.get("su_attempted")),
-            float(request.POST.get("num_root")),
-            float(request.POST.get("num_file_creations")),
-            float(request.POST.get("num_shells")),
-            float(request.POST.get("num_access_files")),
-            float(request.POST.get("num_outbound_cmds")),
-            float(request.POST.get("is_hot_login")),
-            float(request.POST.get("is_guest_login")),
-            float(request.POST.get("count")),
-            float(request.POST.get("srv_count")),
-            float(request.POST.get("serror_rate")),
-            float(request.POST.get("srv_serror_rate")),
-            float(request.POST.get("rerror_rate")),
-            float(request.POST.get("srv_rerror_rate")),
-            float(request.POST.get("same_srv_rate")),
-            float(request.POST.get("diff_srv_rate")),
-            float(request.POST.get("srv_diff_host_rate")),
-            float(request.POST.get("dst_host_count")),
-            float(request.POST.get("dst_host_srv_count")),
-            float(request.POST.get("dst_host_same_srv_rate")),
-            float(request.POST.get("dst_host_diff_srv_rate")),
-            float(request.POST.get("dst_host_same_src_port_rate")),
-            float(request.POST.get("dst_host_srv_diff_host_rate")),
-            float(request.POST.get("dst_host_serror_rate")),
-            float(request.POST.get("dst_host_srv_serror_rate")),
-            float(request.POST.get("dst_host_rerror_rate")),
-            float(request.POST.get("dst_host_srv_rerror_rate")),
-        ]
+        NetworkConnection.objects.create(
+            duration=request.POST.get("duration"),
+            protocol_type=request.POST.get("protocol_type"),
+            service=request.POST.get("service"),
+            src_bytes=request.POST.get("src_bytes"),
+            dst_bytes=request.POST.get("dst_bytes"),
+            flag=request.POST.get("flag"),
+            wrong_fragment=request.POST.get("wrong_fragment"),
+            urgent=request.POST.get("urgent"),
+            count=request.POST.get("count"),
+            serror_rate=request.POST.get("serror_rate") or None,
+            rerror_rate=request.POST.get("rerror_rate") or None,
+            same_srv_rate=request.POST.get("same_srv_rate") or None,
+            diff_srv_rate=request.POST.get("diff_srv_rate") or None,
+            srv_count=request.POST.get("srv_count"),
+            srv_serror_rate=request.POST.get("srv_serror_rate") or None,
+            srv_rerror_rate=request.POST.get("srv_rerror_rate") or None,
+            srv_diff_host_rate=request.POST.get("srv_diff_host_rate") or None,
+            dst_host_count=request.POST.get("dst_host_count"),
+            dst_host_srv_count=request.POST.get("dst_host_srv_count"),
+            dst_host_same_srv_rate=request.POST.get("dst_host_same_srv_rate") or None,
+            dst_host_diff_srv_rate=request.POST.get("dst_host_diff_srv_rate") or None,
+            dst_host_same_src_port_rate=request.POST.get("dst_host_same_src_port_rate") or None,
+            dst_host_srv_diff_host_rate=request.POST.get("dst_host_srv_diff_host_rate") or None,
+            dst_host_serror_rate=request.POST.get("dst_host_serror_rate") or None,
+            dst_host_srv_serror_rate=request.POST.get("dst_host_srv_serror_rate") or None,
+            dst_host_rerror_rate=request.POST.get("dst_host_rerror_rate") or None,
+            dst_host_srv_rerror_rate=request.POST.get("dst_host_srv_rerror_rate") or None,
+        )
 
-        # Convert to 2D array
-        data = np.array(data).reshape(1, -1)
-
-        # Predict
-        pred = model.predict(data)[0]
-
-        # Reverse-encode attack label
-        attack_label = encoders["attack"].inverse_transform([pred])[0]
-
-        return render(request, "result.html", {"result": attack_label})
+        return redirect("result")
 
     sweetify.toast(request, 'Welcome To NIDS 2025', icon='success')
     return render(request, "dashboard.html")
+
+    # if request.method == "POST":
+        # Collect ALL 41 features from your form
+        # (same order as the dataset)
+    #     data = [
+    #         float(request.POST.get("duration")),
+    #         encoders["protocol_type"].transform([request.POST.get("protocol_type")])[0],
+    #         encoders["service"].transform([request.POST.get("service")])[0],
+    #         encoders["flag"].transform([request.POST.get("flag")])[0],
+    #         float(request.POST.get("src_bytes")),
+    #         float(request.POST.get("dst_bytes")),
+    #         float(request.POST.get("land")),
+    #         float(request.POST.get("wrong_fragment")),
+    #         float(request.POST.get("urgent")),
+    #         float(request.POST.get("hot")),
+    #         float(request.POST.get("num_failed_logins")),
+    #         float(request.POST.get("logged_in")),
+    #         float(request.POST.get("num_compromised")),
+    #         float(request.POST.get("root_shell")),
+    #         float(request.POST.get("su_attempted")),
+    #         float(request.POST.get("num_root")),
+    #         float(request.POST.get("num_file_creations")),
+    #         float(request.POST.get("num_shells")),
+    #         float(request.POST.get("num_access_files")),
+    #         float(request.POST.get("num_outbound_cmds")),
+    #         float(request.POST.get("is_hot_login")),
+    #         float(request.POST.get("is_guest_login")),
+    #         float(request.POST.get("count")),
+    #         float(request.POST.get("srv_count")),
+    #         float(request.POST.get("serror_rate")),
+    #         float(request.POST.get("srv_serror_rate")),
+    #         float(request.POST.get("rerror_rate")),
+    #         float(request.POST.get("srv_rerror_rate")),
+    #         float(request.POST.get("same_srv_rate")),
+    #         float(request.POST.get("diff_srv_rate")),
+    #         float(request.POST.get("srv_diff_host_rate")),
+    #         float(request.POST.get("dst_host_count")),
+    #         float(request.POST.get("dst_host_srv_count")),
+    #         float(request.POST.get("dst_host_same_srv_rate")),
+    #         float(request.POST.get("dst_host_diff_srv_rate")),
+    #         float(request.POST.get("dst_host_same_src_port_rate")),
+    #         float(request.POST.get("dst_host_srv_diff_host_rate")),
+    #         float(request.POST.get("dst_host_serror_rate")),
+    #         float(request.POST.get("dst_host_srv_serror_rate")),
+    #         float(request.POST.get("dst_host_rerror_rate")),
+    #         float(request.POST.get("dst_host_srv_rerror_rate")),
+    #     ]
+
+    #     # Convert to 2D array
+    #     data = np.array(data).reshape(1, -1)
+
+    #     # Predict
+    #     pred = model.predict(data)[0]
+
+    #     # Reverse-encode attack label
+    #     attack_label = encoders["attack"].inverse_transform([pred])[0]
+
+    #     return render(request, "result.html", {"result": attack_label})
+
+    # sweetify.toast(request, 'Welcome To NIDS 2025', icon='success')
+    # return render(request, "dashboard.html")
 
 
 
@@ -217,4 +254,4 @@ def upload_csv(request):
 
 def uploaded_result(req):
     sweetify.toast(req, 'Uploaded Successfully!', icon='success')
-    return render(req, 'uploaded_result.html    ')
+    return render(req, 'uploaded_result.html')

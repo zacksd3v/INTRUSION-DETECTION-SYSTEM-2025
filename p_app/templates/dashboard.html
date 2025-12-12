@@ -29,6 +29,7 @@
 <div class="f-all">
             <div class="cont">
             <form class="row g-4">
+                {% csrf_token %}
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Package Size</label>
                     <input type="number" class="form-control" id="inputEmail4" placeholder="0 / 1" required>
@@ -70,17 +71,94 @@
 
             <div class="cont">
             <form class="row g-3" method="post">
+                {% csrf_token %}
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Duration</label>
                     <input type="number" class="form-control" name="duration" id="inputEmail4" placeholder="length (number of seconds) of the connection" required>
                 </div>
+               
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label">Protocol_type</label>
-                    <input type="number" name="protocol_type" class="form-control" id="inputPassword4" placeholder="type of the protocol, e.g, TCP, UDP" required>
+                    <select class="form-control" name="protocol_type" required>
+                        <option value="">-- Select Protocol --</option>
+                        <option value="tcp">tcp</option>
+                        <option value="udp">udp</option>
+                        <option value="icmp">icmp</option>
+                    </select>
                 </div>
+
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Service</label>
-                    <input type="text" name="service" class="form-control" id="inputAddress" placeholder="network service on the destination, e.g., HTTP, telnet" required>
+                    <select class="form-control" name="service" required>
+                        <option value="">-- Select Service --</option>
+                        <option value="aol">aol</option>
+                        <option value="auth">auth</option>
+                        <option value="bgp">bgp</option>
+                        <option value="courier">courier</option>
+                        <option value="csnet_ns">csnet_ns</option>
+                        <option value="ctftp">ctftp</option>
+                        <option value="daytime">daytime</option>
+                        <option value="discard">discard</option>
+                        <option value="domain">domain</option>
+                        <option value="domain_u">domain_u</option>
+                        <option value="echo">echo</option>
+                        <option value="ecr_i">ecr_i</option>
+                        <option value="eco_i">eco_i</option>
+                        <option value="efs">efs</option>
+                        <option value="exec">exec</option>
+                        <option value="finger">finger</option>
+                        <option value="ftp">ftp</option>
+                        <option value="ftp_data">ftp_data</option>
+                        <option value="gopher">gopher</option>
+                        <option value="http">http</option>
+                        <option value="http_443">http_443</option>
+                        <option value="imap4">imap4</option>
+                        <option value="IRC">IRC</option>
+                        <option value="iso_tsap">iso_tsap</option>
+                        <option value="klogin">klogin</option>
+                        <option value="kshell">kshell</option>
+                        <option value="ldap">ldap</option>
+                        <option value="link">link</option>
+                        <option value="login">login</option>
+                        <option value="mtp">mtp</option>
+                        <option value="name">name</option>
+                        <option value="netbios_dgm">netbios_dgm</option>
+                        <option value="netbios_ns">netbios_ns</option>
+                        <option value="netbios_ssn">netbios_ssn</option>
+                        <option value="netstat">netstat</option>
+                        <option value="nnsp">nnsp</option>
+                        <option value="nntp">nntp</option>
+                        <option value="ntp_u">ntp_u</option>
+                        <option value="other">other</option>
+                        <option value="pm_dump">pm_dump</option>
+                        <option value="pop_2">pop_2</option>
+                        <option value="pop_3">pop_3</option>
+                        <option value="printer">printer</option>
+                        <option value="private">private</option>
+                        <option value="red_i">red_i</option>
+                        <option value="remote_job">remote_job</option>
+                        <option value="rje">rje</option>
+                        <option value="shell">shell</option>
+                        <option value="smtp">smtp</option>
+                        <option value="sql_net">sql_net</option>
+                        <option value="ssh">ssh</option>
+                        <option value="sunrpc">sunrpc</option>
+                        <option value="supdup">supdup</option>
+                        <option value="systat">systat</option>
+                        <option value="telnet">telnet</option>
+                        <option value="tftp_u">tftp_u</option>
+                        <option value="tim_i">tim_i</option>
+                        <option value="time">time</option>
+                        <option value="urh_i">urh_i</option>
+                        <option value="urp_i">urp_i</option>
+                        <option value="uucp">uucp</option>
+                        <option value="uucp_path">uucp_path</option>
+                        <option value="vmnet">vmnet</option>
+                        <option value="whois">whois</option>
+                        <option value="X11">X11</option>
+                        <option value="Z39_50">Z39_50</option>
+                    </select>
+         
                 </div>
                 <div class="col-12">
                     <label for="inputAddress2" class="form-label">Src_bytes</label>
@@ -92,12 +170,23 @@
                 </div>
                 <div class="col-12">
                     <label for="inputState" class="form-label">Flag</label>
-                    <input type="number" name="flag" class="form-control" id="inputCity" placeholder="normal or error status of the connection" required>
+                     <select class="form-control" name="flag" required>
+                        <option value="">-- Select Flag --</option>
+                        <option value="SF">SF</option>
+                        <option value="S0">S0</option>
+                        <option value="REJ">REJ</option>
+                        <option value="RSTR">RSTR</option>
+                        <option value="RSTO">RSTO</option>
+                        <option value="SH">SH</option>
+                        <option value="S1">S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                        <option value="OTH">OTH</option>
+                        <option value="RSTOS0">RSTOS0</option>
+                    </select>
+
                 </div>
-                <div class="col-12">
-                    <label for="inputZip" class="form-label">Land</label>
-                    <input type="text" name="land" class="form-control" id="inputZip" placeholder="add 1 for host/port; 0 otherwise" required>
-                </div>
+
                 <div class="col-12">
                     <label for="inputZip" class="form-label">Wrong_fragment</label>
                     <input type="number" name="wrong_fragment" class="form-control" id="inputZip" placeholder="number of ``wrong'' fragments" required>
@@ -106,73 +195,26 @@
                     <label for="inputZip" class="form-label">Ugent</label>
                     <input type="text" name="urgent" class="form-control" id="inputZip" placeholder="number of urgent packets" required>
                 </div>
-                <div class="col-md-6">
-                    <label for="inputEmail4" class="form-label">Hot</label>
-                    <input type="number" name="hot" class="form-control" id="inputEmail4" placeholder="number of ``hot'' indicators" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="inputPassword4" class="form-label">Num_failed_logins</label>
-                    <input type="number" name="num_failed_logins" class="form-control" id="inputPassword4" placeholder="number of failed login attempts" required>
-                </div>
-                <div class="col-12">
-                    <label for="inputAddress" class="form-label">Logged_in</label>
-                    <input type="text" name="logged_in" class="form-control" id="inputAddress" placeholder="number of ``compromised'' conditions" required>
-                </div>
-                <div class="col-12">
-                    <label for="inputAddress2" class="form-label">Root_shell</label>
-                    <input type="number" name="root_shell" class="form-control" id="inputAddress2" placeholder="1 if root shell is obtained; 0 otherwise" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="inputCity" class="form-label">Su_attempted</label>
-                    <input type="text" name="su_attempted" class="form-control" id="inputCity" placeholder="1 if ``su root'' command attempted; 0 otherwise	" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="inputState" class="form-label">Num_root</label>
-                    <input type="text" name="num_root" class="form-control" id="inputCity" placeholder="number of ``root'' accesses" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="inputZip" class="form-label">Num_file_creations</label>
-                    <input type="number" name="num_file_creations" class="form-control" id="inputZip" placeholder="number of file creation operations" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="inputZip" class="form-label">Num_shells</label>
-                    <input type="number" name="num_shells" class="form-control" id="inputZip" placeholder="number of shell prompts" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="inputZip" class="form-label">Num_access_files</label>
-                    <input type="number" name="num_access_files" class="form-control" id="inputZip" placeholder="number of files access" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="inputZip" class="form-label">Num_outbound_cmds</label>
-                    <input type="number" name="num_outbound_cmds" class="form-control" id="inputZip" placeholder="number of outbound commands in an ftp session" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="inputZip" class="form-label">Is_hot_login</label>
-                    <input type="number" name="is_hot_login" class="form-control" id="inputZip" placeholder="1 if the login belongs to the ``hot'' list; 0 otherwise" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="inputZip" class="form-label">Is_guest_login</label>
-                    <input type="number" name="is_guest_login" class="form-control" id="inputZip" placeholder="1 if the login is a ``guest''login; 0 otherwise" required>
-                </div>
+                
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Count</label>
                     <input type="number" name="count" class="form-control" id="inputEmail4" placeholder="number of connections to the same host in 2sec" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label">Serror_rate</label>
-                    <input type="number" name="serror_rate" class="form-control" id="inputPassword4" placeholder="% of connections that have ``SYN'' errors" required>
+                    <input type="number" name="serror_rate" class="form-control" id="inputPassword4" placeholder="% of connections that have ``SYN'' errors">
                 </div>
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Rerror_rate</label>
-                    <input type="text" name="rerror_rate" class="form-control" id="inputAddress" placeholder="% of connections that have ``REJ'' errors" required>
+                    <input type="text" name="rerror_rate" class="form-control" id="inputAddress" placeholder="% of connections that have ``REJ'' errors">
                 </div>
                 <div class="col-12">
                     <label for="inputAddress2" class="form-label">Same_srv_rate</label>
-                    <input type="number" name="same_srv_rate" class="form-control" id="inputAddress2" placeholder="% of connections to the same service" required>
+                    <input type="number" name="same_srv_rate" class="form-control" id="inputAddress2" placeholder="% of connections to the same service">
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">Diff_srv_rate</label>
-                    <input type="number" name="diff_srv_rate" class="form-control" id="inputCity" placeholder="% of connections to different services" required>
+                    <input type="number" name="diff_srv_rate" class="form-control" id="inputCity" placeholder="% of connections to different services">
                 </div>
                 <div class="col-md-6">
                     <label for="inputState" class="form-label">Srv_count</label>
@@ -180,16 +222,66 @@
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">Srv_serror_rate</label>
-                    <input type="number" name="srv_serror_rate" class="form-control" id="inputCity" placeholder="% of connections that have ``SYN'' errors" required>
+                    <input type="number" name="srv_serror_rate" class="form-control" id="inputCity" placeholder="% of connections that have ``SYN'' errors">
                 </div>
                 <div class="col-md-6">
                     <label for="inputState" class="form-label">Srv_rerror_rate</label>
-                    <input type="number" name="srv_rerror_rate" class="form-control" id="inputCity" placeholder="number of connections to the same service" required>
+                    <input type="number" name="srv_rerror_rate" class="form-control" id="inputCity" placeholder="number of connections to the same service">
                 </div>
                 <div class="col-12">
                     <label for="inputState" class="form-label">Srv_diff_host_rate</label>
-                    <input type="text" name="srv_diff_host_rate" class="form-control" id="inputCity" placeholder="% of connections to different hosts" required>
+                    <input type="text" name="srv_diff_host_rate" class="form-control" id="inputCity" placeholder="% of connections to different hosts">
                 </div>
+                <div class="col-md-4">
+                    <label class="form-label">Dst_host_count</label>
+                    <input type="number" name="dst_host_count" class="form-control" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Dst_host_srv_count</label>
+                    <input type="number" name="dst_host_srv_count" class="form-control" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Dst_host_same_srv_rate</label>
+                    <input type="number" name="dst_host_same_srv_rate" class="form-control" step="any">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Dst_host_diff_srv_rate</label>
+                    <input type="number" name="dst_host_diff_srv_rate" class="form-control" step="any">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Dst_host_same_src_port_rate</label>
+                    <input type="number" name="dst_host_same_src_port_rate" class="form-control" step="any">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Dst_host_srv_diff_host_rate</label>
+                    <input type="number" name="dst_host_srv_diff_host_rate" class="form-control" step="any">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Dst_host_serror_rate</label>
+                    <input type="number" name="dst_host_serror_rate" class="form-control" step="any">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Dst_host_srv_serror_rate</label>
+                    <input type="number" name="dst_host_srv_serror_rate" class="form-control" step="any">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Dst_host_rerror_rate</label>
+                    <input type="number" name="dst_host_rerror_rate" class="form-control" step="any">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Dst_host_srv_rerror_rate</label>
+                    <input type="number" name="dst_host_srv_rerror_rate" class="form-control" step="any">
+                </div>
+
                 <div class="col-12">
                     <!-- <input > -->
                     <button type="submit" class="form-control btn btn-danger mt-3" id="inputCity" value="Check Packet" aria-required="true">
