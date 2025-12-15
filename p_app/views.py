@@ -4,6 +4,7 @@ import joblib
 import numpy as np
 import pandas as pd
 from .attack import ATTACK_TYPES
+from .forms import UploadTrafficForm
 from .models import NetworkConnection
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -60,13 +61,6 @@ def login_user(req):
     return render(req, 'login.html')
 
 
-# @login_required
-# def dashboard(req):
-#     sweetify.toast(req, 'Welcome To NIDS 2025', icon='success')
-#     return render(req, 'dashboard.html')
-    
-
-
 def forget(req):
 
     if req.method == 'POST':
@@ -91,7 +85,7 @@ def logout_view(request):
 model = joblib.load("model.pkl")
 encoders = joblib.load("encoders.pkl")
 
-# @login_required
+@login_required
 def dashboard(request):
     if request.method == "POST":
         result = NetworkConnection.objects.create(
@@ -200,12 +194,13 @@ def dashboard(request):
     # return render(request, "dashboard.html")
 
 
-
+@login_required
 def result(req):
     sweetify.toast(req, 'Predicted Successfully!', icon='success')
     return render(req, 'result.html')
 
 
+@login_required
 def upload_csv(request):
     sweetify.toast(request, 'Caution! Upload Only CSV File!', icon='warning')
 
@@ -262,7 +257,66 @@ def upload_csv(request):
 
     return render(request, "upload.html")
 
-
+@login_required
 def uploaded_result(req):
     sweetify.toast(req, 'Uploaded Successfully!', icon='success')
     return render(req, 'uploaded_result.html')
+
+@login_required
+def connection_list(request):
+    connections = NetworkConnection.objects.all().order_by('-id')
+
+    # Example chart data: count how many are normal vs attack
+    normal_count = 0
+    attack_count = 0
+
+    for c in connections:
+        if (c.serror_rate and c.serror_rate > 0) or (c.rerror_rate and c.rerror_rate > 0):
+            attack_count += 1
+        else:
+            normal_count += 1
+
+    return render(request, "connection_list.html", {
+        "connections": connections,
+        "normal_count": normal_count,
+        "attack_count": attack_count,
+    })
+# def connection_list(request):
+#     connections = NetworkConnection.objects.all().order_by('-id')
+#     return render(request, "connection_list.html", {"connections": connections})
+
+
+def upload_page(request):
+    if request.method == "POST":
+        form = UploadTrafficForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            uploaded_file = request.FILES["file"]
+
+            # TODO: Replace with your ML model
+            result = random.choice(["normal", "attack"])
+
+            return redirect(f"/success/?result={result}")
+
+    else:
+        form = UploadTrafficForm()
+
+    return render(request, "upload_page.html", {"form": form})
+
+
+def success_page(request):
+    result = request.GET.get("result")
+
+    attack = None
+    if result != "normal":
+        attack = random.choice(ATTACK_TYPES)
+
+    return render(request, "success.html", {
+        "result": result,
+        "attack": attack
+    })
+
+
+def connection_list(request):
+    connections = NetworkConnection.objects.all().order_by('-id')
+    return render(request, "connection_list.html", {"connections": connections})

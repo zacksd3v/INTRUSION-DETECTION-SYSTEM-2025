@@ -21,6 +21,7 @@
     <h1 class="m">INTRUSION DETECTION SYSTEM 2025</h1>
 
     </nav>
+
     {% if result == "normal" %}
         <div class="result-box safe-box">
             <h1>✔ NORMAL TRAFFIC</h1>
@@ -41,13 +42,26 @@
         </div>
     {% endif %}
 
+<!-- {% if result == "normal" %}
+    <div class="result-box safe-box">
+        <h1>✔ NORMAL TRAFFIC</h1>
+        <p style="font-size: 20px;">The connection appears safe. No malicious activity detected.</p>
+    </div>
+{% else %}
+    <div class="result-box attack-box">
+        <h1>⚠ ATTACK DETECTED</h1>
+        <p style="font-size: 22px;">Attack Type: <strong>{{ attack|upper }}</strong></p>
+        <p style="font-size: 18px;">This traffic pattern matches a known intrusion signature.</p>
+    </div>
+{% endif %} -->
 
-    <div class="text-center">
-        <a href="{% url 'dashboard' %}" class="btn btn-info btn-back">⬅ Back to Dashboard</a>
-    </div>
-    <div class="text-center">
-        <a href="{% url 'connection_list' %}" class="btn btn-info btn-back">&raquo; Goto to Connection List Record</a>
-    </div>
+
+<div class="text-center">
+    <a href="{% url 'dashboard' %}" class="btn btn-info btn-back">⬅ Back to Dashboard</a>
+</div>
+<div class="text-center">
+    <a href="{% url 'connection_list' %}" class="btn btn-info btn-back">&raquo; Goto to Connection List Record</a>
+</div>
 
 </body>
 </html>

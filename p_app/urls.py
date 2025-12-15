@@ -8,8 +8,8 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('forget_password/', views.forget, name='forget_password'),
     path("result/", views.result, name="result"),
-    # path('upload', views.upload, name='upload'),
-    path("upload_csv/", views.upload_csv, name="upload_csv"),
-    path("uploaded_result/", views.uploaded_result, name="uploaded_result"),
+    path("connections/", views.connection_list, name="connection_list"),
+    path("upload/", views.upload_page, name="upload_page"),
+    path("success/", views.success_page, name="success_page"),
 
 ]

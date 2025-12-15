@@ -53,3 +53,39 @@ class NetworkConnection(models.Model):
 
     def __str__(self):
         return f"{self.protocol_type} - {self.service} - {self.duration}s"
+    
+
+
+class NetworkUpload(models.Model):
+    duration = models.IntegerField()
+    protocol_type = models.CharField(max_length=10)
+    service = models.CharField(max_length=50)
+    src_bytes = models.IntegerField()
+    dst_bytes = models.IntegerField()
+    flag = models.CharField(max_length=10)
+    wrong_fragment = models.IntegerField()
+    urgent = models.IntegerField()
+    count = models.IntegerField()
+
+    # Optional numeric fields
+    serror_rate = models.FloatField(null=True, blank=True)
+    rerror_rate = models.FloatField(null=True, blank=True)
+    same_srv_rate = models.FloatField(null=True, blank=True)
+    diff_srv_rate = models.FloatField(null=True, blank=True)
+    srv_count = models.IntegerField()
+    srv_serror_rate = models.FloatField(null=True, blank=True)
+    srv_rerror_rate = models.FloatField(null=True, blank=True)
+    srv_diff_host_rate = models.FloatField(null=True, blank=True)
+    dst_host_count = models.IntegerField()
+    dst_host_srv_count = models.IntegerField()
+    dst_host_same_srv_rate = models.FloatField(null=True, blank=True)
+    dst_host_diff_srv_rate = models.FloatField(null=True, blank=True)
+    dst_host_same_src_port_rate = models.FloatField(null=True, blank=True)
+    dst_host_srv_diff_host_rate = models.FloatField(null=True, blank=True)
+    dst_host_serror_rate = models.FloatField(null=True, blank=True)
+    dst_host_srv_serror_rate = models.FloatField(null=True, blank=True)
+    dst_host_rerror_rate = models.FloatField(null=True, blank=True)
+    dst_host_srv_rerror_rate = models.FloatField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.protocol_type} - {self.service}"
