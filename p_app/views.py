@@ -3,6 +3,7 @@ import random
 import joblib
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from .attack import ATTACK_TYPES
 from .forms import UploadTrafficForm
 from .models import NetworkConnection
@@ -131,67 +132,6 @@ def dashboard(request):
 
     sweetify.toast(request, 'Welcome To NIDS 2025', icon='success')
     return render(request, "dashboard.html")
-
-    # if request.method == "POST":
-        # Collect ALL 41 features from your form
-        # (same order as the dataset)
-    #     data = [
-    #         float(request.POST.get("duration")),
-    #         encoders["protocol_type"].transform([request.POST.get("protocol_type")])[0],
-    #         encoders["service"].transform([request.POST.get("service")])[0],
-    #         encoders["flag"].transform([request.POST.get("flag")])[0],
-    #         float(request.POST.get("src_bytes")),
-    #         float(request.POST.get("dst_bytes")),
-    #         float(request.POST.get("land")),
-    #         float(request.POST.get("wrong_fragment")),
-    #         float(request.POST.get("urgent")),
-    #         float(request.POST.get("hot")),
-    #         float(request.POST.get("num_failed_logins")),
-    #         float(request.POST.get("logged_in")),
-    #         float(request.POST.get("num_compromised")),
-    #         float(request.POST.get("root_shell")),
-    #         float(request.POST.get("su_attempted")),
-    #         float(request.POST.get("num_root")),
-    #         float(request.POST.get("num_file_creations")),
-    #         float(request.POST.get("num_shells")),
-    #         float(request.POST.get("num_access_files")),
-    #         float(request.POST.get("num_outbound_cmds")),
-    #         float(request.POST.get("is_hot_login")),
-    #         float(request.POST.get("is_guest_login")),
-    #         float(request.POST.get("count")),
-    #         float(request.POST.get("srv_count")),
-    #         float(request.POST.get("serror_rate")),
-    #         float(request.POST.get("srv_serror_rate")),
-    #         float(request.POST.get("rerror_rate")),
-    #         float(request.POST.get("srv_rerror_rate")),
-    #         float(request.POST.get("same_srv_rate")),
-    #         float(request.POST.get("diff_srv_rate")),
-    #         float(request.POST.get("srv_diff_host_rate")),
-    #         float(request.POST.get("dst_host_count")),
-    #         float(request.POST.get("dst_host_srv_count")),
-    #         float(request.POST.get("dst_host_same_srv_rate")),
-    #         float(request.POST.get("dst_host_diff_srv_rate")),
-    #         float(request.POST.get("dst_host_same_src_port_rate")),
-    #         float(request.POST.get("dst_host_srv_diff_host_rate")),
-    #         float(request.POST.get("dst_host_serror_rate")),
-    #         float(request.POST.get("dst_host_srv_serror_rate")),
-    #         float(request.POST.get("dst_host_rerror_rate")),
-    #         float(request.POST.get("dst_host_srv_rerror_rate")),
-    #     ]
-
-    #     # Convert to 2D array
-    #     data = np.array(data).reshape(1, -1)
-
-    #     # Predict
-    #     pred = model.predict(data)[0]
-
-    #     # Reverse-encode attack label
-    #     attack_label = encoders["attack"].inverse_transform([pred])[0]
-
-    #     return render(request, "result.html", {"result": attack_label})
-
-    # sweetify.toast(request, 'Welcome To NIDS 2025', icon='success')
-    # return render(request, "dashboard.html")
 
 
 @login_required

@@ -88,17 +88,30 @@
     <h1 class="m">INTRUSION DETECTION SYSTEM 2025</h1>
 
     </nav>
+<h2 style="text-align:center; color:#00eaff; text-shadow:0 0 10px #00eaff;">
+    Traffic Classification Chart
+</h2>
 
-<div class="container mt-5">
-    <h2 style="text-align:center; color:#00eaff; text-shadow:0 0 10px #00eaff;">
-        Traffic Classification Chart
-    </h2>
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+">
+    <img src="../static/KDDTest1.jpg"
+         style="height: 450px; filter: drop-shadow(0 0 15px #00eaff);" />
 
-    <canvas id="trafficChart" style="max-height: 350px;"></canvas>
+    <img src="../static/KDDTest1.jpg"
+         style="height: 450px; filter: drop-shadow(0 0 15px #00eaff);" />
+
+    <img src="../static/KDDTest1.jpg"
+         style="height: 450px; filter: drop-shadow(0 0 15px #00eaff);" />
 </div>
 
 
-<h1>Network Traffic Records</h1>
+<h1 style="margin-top: 30px;">Network Traffic Records</h1>
 
 <div class="container mt-4">
     <table class="table table-bordered table-hover cyber-table">
@@ -148,40 +161,6 @@
         <a href="{% url 'dashboard' %}" class="btn btn-info btn-back">⬅ Back to Dashboard</a>
     </div>
 </div>
-
-<script>
-    const ctx = document.getElementById('trafficChart').getContext('2d');
-
-    const trafficChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Normal Traffic', 'Attack Traffic'],
-            datasets: [{
-                data: [{{ normal_count }}, {{ attack_count }}],
-                backgroundColor: [
-                    'rgba(0, 255, 136, 0.7)',   // neon green
-                    'rgba(255, 0, 76, 0.7)'     // neon red
-                ],
-                borderColor: [
-                    'rgba(0, 255, 136, 1)',
-                    'rgba(255, 0, 76, 1)'
-                ],
-                borderWidth: 3,
-                hoverOffset: 20
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#00eaff',
-                        font: { size: 16 }
-                    }
-                }
-            }
-        }
-    });
-</script>
 
 </body>
 </html>
