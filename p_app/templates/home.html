@@ -214,6 +214,10 @@ section {
     background: linear-gradient(135deg, rgba(0,234,255,0.15), transparent);
 }
 
+.links {
+    text-decoration: none;
+}
+
 /* FOOTER */
 footer {
     background: var(--bg-dark);
@@ -263,10 +267,10 @@ footer a {
 
 <nav>
     <div class="logo">🛡️ Poly NIDs 2026</div>
-    <div>
-        <a>Features</a>
-        <a>Pricing</a>
-        <a>Docs</a>
+    <div class="links">
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">Docs</a>
         <a href="{% url 'login' %}" class="btn-outline">Sign In</a>
         <a href="{% url 'signup' %}" class="btn-primary">Get Started</a>
     </div>
@@ -279,7 +283,7 @@ footer a {
 
     <div class="actions">
         <a class="btn-primary" href="{% url 'signup' %}">Start Free Trial</a>
-        <a class="btn-outline">View Docs</a>
+        <a class="btn-outline" href="#">View Docs</a>
     </div>
 
     <div class="stats">
@@ -335,6 +339,7 @@ footer a {
 </div>
 
 </section>
+
 
 <section>
     <div class="section-title"><h2>FAQ</h2></div>
@@ -400,9 +405,9 @@ footer a {
 
 <footer>
     <div><h4>NetGuard</h4><p>NIDs cyber defense.</p></div>
-    <div><h4>Product</h4><a>Features</a><a>Pricing</a></div>
-    <div><h4>Company</h4><a>About</a><a>Contact</a></div>
-    <div><h4>Legal</h4><a>Privacy</a><a>Terms</a></div>
+    <div><h4>Product</h4><a href="#">Features</a><a href="#">Pricing</a></div>
+    <div><h4>Company</h4><a href="#">About</a><a href="#">Contact</a></div>
+    <div><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a></div>
 </footer>
 
 <div class="footer-bottom">© 2026 NIDs. All rights reserved.</div>

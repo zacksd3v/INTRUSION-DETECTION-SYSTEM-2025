@@ -130,7 +130,7 @@ def dashboard(request):
                 "attack": random_attack,
                 })
 
-    sweetify.toast(request, 'Welcome To NIDS 2025', icon='success')
+    sweetify.toast(request, 'Welcome To NIDS 2026', icon='success')
     return render(request, "dashboard.html")
 
 
