@@ -260,3 +260,10 @@ def success_page(request):
 def connection_list(request):
     connections = NetworkConnection.objects.all().order_by('-id')
     return render(request, "connection_list.html", {"connections": connections})
+
+
+def analysisPage(request):
+    return render(request, 'analysis.html')
+
+def home(request):
+    return render(request, 'home.html')

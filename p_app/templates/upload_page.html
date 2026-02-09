@@ -51,7 +51,7 @@
         }
 
         .m {
-            margin-right: 101rem;
+            margin-right: 104rem;
         }
 
         img {
@@ -61,6 +61,22 @@
 
 </head>
 <body>
+       <!-- Page Loader -->
+<div id="loader-wrapper" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0a0f1f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+">
+    <div class="spinner-border text-info" role="status" style="width: 5rem; height: 5rem; filter: drop-shadow(0 0 20px #00eaff);">
+    </div>
+</div>  
 {% sweetify %}
 <!-- Image and text -->
 <nav class="navbar navbar-light bg-blue" style="border-bottom: 1px solid; box-shadow: 0px 4px 8px 0px rgba(12, 147, 226, 0.3); margin-bottom: 40px; height: 20%;">
@@ -83,5 +99,18 @@
 <div class="text-center">
         <a href="{% url 'dashboard' %}" class="btn btn-info btn-back">⬅ Back to Dashboard</a>
 </div>
+
+<script>
+    window.addEventListener("load", function() {
+        const loader = document.getElementById("loader-wrapper");
+        loader.style.opacity = "0";
+        loader.style.transition = "opacity 0.5s ease";
+
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 500);
+    });
+</script>
+
 </body>
 </html>

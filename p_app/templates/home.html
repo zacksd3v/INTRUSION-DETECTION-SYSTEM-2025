@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NetGuard | AI Network Security</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+:root {
+    --neon: #00eaff;
+    --bg-dark: #05080f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, #0d1224, var(--bg-dark));
+    color: #cdefff;
+    overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 60px;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--neon);
+}
+
+nav a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: #b6dfff;
+}
+
+.btn-primary {
+    background: var(--neon);
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    box-shadow: 0 0 20px var(--neon);
+    transition: transform 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.btn-outline {
+    border: 1px solid var(--neon);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: var(--neon);
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 120px 20px;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.badge {
+    border: 1px solid var(--neon);
+    color: var(--neon);
+    padding: 6px 18px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: 3.8rem;
+}
+
+.hero span {
+    color: var(--neon);
+}
+
+.hero p {
+    max-width: 750px;
+    margin: 20px auto;
+    opacity: 0.85;
+}
+
+.actions a {
+    margin: 12px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* STATS */
+.stats {
+    margin-top: 90px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    width: 220px;
+    padding: 30px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(0,234,255,0.3);
+    box-shadow: 0 0 25px rgba(0,234,255,0.15);
+}
+
+.stat i {
+    font-size: 2rem;
+    color: var(--neon);
+}
+
+/* SECTIONS */
+section {
+    padding: 110px 60px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.section-title h2 {
+    font-size: 2.7rem;
+}
+
+.section-title span {
+    color: var(--neon);
+}
+
+/* FEATURES */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+}
+
+.feature {
+    padding: 35px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(0,234,255,0.2);
+    transition: transform 0.3s;
+}
+
+.feature:hover {
+    transform: translateY(-8px);
+}
+
+/* PRICING */
+.pricing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+}
+
+.price-card {
+    text-align: center;
+    padding: 40px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,234,255,0.3);
+}
+
+.price {
+    font-size: 2.5rem;
+    color: var(--neon);
+}
+
+/* TESTIMONIALS */
+.testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+}
+
+.quote {
+    font-style: italic;
+    opacity: 0.85;
+}
+
+/* FAQ */
+.faq details {
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(0,234,255,0.2);
+}
+
+/* CTA */
+.cta {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(0,234,255,0.15), transparent);
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    padding: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 30px;
+}
+
+footer h4 {
+    color: var(--neon);
+    margin-bottom: 15px;
+}
+
+footer a {
+    display: block;
+    margin-bottom: 10px;
+    color: #b6dfff;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 2.6rem;
+    }
+
+    section {
+        padding: 80px 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">🛡️ Poly NIDs 2026</div>
+    <div>
+        <a>Features</a>
+        <a>Pricing</a>
+        <a>Docs</a>
+        <a href="{% url 'login' %}" class="btn-outline">Sign In</a>
+        <a href="{% url 'signup' %}" class="btn-primary">Get Started</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="badge">Katsina Polytechnic NIDS 2026</div>
+    <h1>Network Intrusion<br><span>Detection System</span></h1>
+    <p>Enterprise-grade AI security that detects, analyzes, and blocks threats in real-time.</p>
+
+    <div class="actions">
+        <a class="btn-primary" href="{% url 'signup' %}">Start Free Trial</a>
+        <a class="btn-outline">View Docs</a>
+    </div>
+
+    <div class="stats">
+        <div class="stat"><i class="bi bi-shield-check"></i><h2>99.7%</h2><p>Detection</p></div>
+        <div class="stat"><i class="bi bi-lightning-charge"></i><h2>&lt;50ms</h2><p>Latency</p></div>
+        <div class="stat"><i class="bi bi-graph-up"></i><h2>1M+</h2><p>Threats</p></div>
+    </div>
+</section>
+
+<section>
+    <div class="section-title"><h2>Why <span>NIDs</span></h2></div>
+    <div class="features">
+        <div class="feature"><h3>AI Detection</h3><p>Deep learning models trained on real attacks.</p></div>
+        <div class="feature"><h3>Zero Trust</h3><p>Continuous behavioral analysis.</p></div>
+        <div class="feature"><h3>Auto Response</h3><p>Instant mitigation & alerting.</p></div>
+    </div>
+</section>
+
+<section>
+    <div class="section-title"><h2><span>Pricing</span> Plans</h2></div>
+   <div class="pricing">
+    <div class="price-card"><h3>Starter</h3><div class="price">$0</div><p>Personal & labs</p></div>
+    <div class="price-card"><h3>Pro</h3><div class="price">$29</div><p>Small teams</p></div>
+    <div class="price-card"><h3>Business</h3><div class="price">$59</div><p>Growing teams</p></div>
+    <div class="price-card"><h3>Professional</h3><div class="price">$99</div><p>Professional users</p></div>
+    <div class="price-card"><h3>Enterprise</h3><div class="price">Custom</div><p>Large orgs</p></div>
+    <div class="price-card"><h3>Ultimate</h3><div class="price">$199</div><p>Full-featured</p></div>
+    <div class="price-card"><h3>Team</h3><div class="price">$49</div><p>Small teams</p></div>
+    <div class="price-card"><h3>Corporate</h3><div class="price">Custom</div><p>Multi-department</p></div>
+    <div class="price-card"><h3>Starter Plus</h3><div class="price">$9</div><p>Personal projects</p></div>
+    <div class="price-card"><h3>Pro Plus</h3><div class="price">$39</div><p>Advanced teams</p></div>
+    <div class="price-card"><h3>Ultimate Plus</h3><div class="price">$69</div><p>Feautered Team</p></div>
+    <div class="price-card"><h3>6 Pro Plus</h3><div class="price">$79</div><p>Advanced teams</p></div>
+</div>
+
+</section>
+
+<section>
+    <div class="section-title"><h2>What Users Say</h2></div>
+    <div class="testimonials">
+    <div class="feature"><p class="quote">“NIDs stopped attacks we didn’t even know existed.”</p></div>
+    <div class="feature"><p class="quote">“Insanely fast and accurate.”</p></div>
+    <div class="feature"><p class="quote">“Best NIDs security we’ve used.”</p></div>
+    <div class="feature"><p class="quote">“Our network has never been safer.”</p></div>
+    <div class="feature"><p class="quote">“Detects threats before they become problems.”</p></div>
+    <div class="feature"><p class="quote">“The accuracy is unmatched in the industry.”</p></div>
+    <div class="feature"><p class="quote">“Our IT team loves the insights it provides.”</p></div>
+    <div class="feature"><p class="quote">“Simple to use, powerful in results.”</p></div>
+    <div class="feature"><p class="quote">“A must-have for any enterprise security setup.”</p></div>
+    <div class="feature"><p class="quote">“We finally feel fully protected around the clock.”</p></div>
+    <div class="feature"><p class="quote">“Privacy is power”</p></div>
+    <div class="feature"><p class="quote">“24/7 that why it's cool”</p></div>
+</div>
+
+</section>
+
+<section>
+    <div class="section-title"><h2>FAQ</h2></div>
+    <div class="faq">
+    <details>
+        <summary>Is NIDS real-time?</summary>
+        <p>Yes. Traffic is analyzed in real time and threats are detected and blocked instantly.</p>
+    </details>
+
+    <details>
+        <summary>Can I self-host NIDS?</summary>
+        <p>Yes. NIDS supports both cloud deployment and on-premise infrastructure.</p>
+    </details>
+
+    <details>
+        <summary>What types of attacks does NIDS detect?</summary>
+        <p>NIDS detects DDoS, brute-force, port scanning, malware traffic, and zero-day anomalies.</p>
+    </details>
+
+    <details>
+        <summary>Does NIDS use machine learning?</summary>
+        <p>Yes. It combines signature-based detection with AI-driven behavioral analysis.</p>
+    </details>
+
+    <details>
+        <summary>How fast is the response time?</summary>
+        <p>Average response time is under 50 milliseconds, even under high traffic load.</p>
+    </details>
+
+    <details>
+        <summary>Can NIDS integrate with existing firewalls?</summary>
+        <p>Yes. It integrates seamlessly with firewalls, SIEM tools, and SOC platforms.</p>
+    </details>
+
+    <details>
+        <summary>Does NIDS generate alerts?</summary>
+        <p>Yes. Alerts can be sent via dashboard, email, Slack, or webhook integrations.</p>
+    </details>
+
+    <details>
+        <summary>Is NIDS suitable for enterprises?</summary>
+        <p>Absolutely. NIDS is designed to scale from small teams to enterprise-level networks.</p>
+    </details>
+
+    <details>
+        <summary>Can I customize detection rules?</summary>
+        <p>Yes. You can create, modify, and tune detection rules to match your environment.</p>
+    </details>
+
+    <details>
+        <summary>Is my data secure?</summary>
+        <p>Yes. All data is encrypted in transit and at rest, following industry best practices.</p>
+    </details>
+</div>
+
+</section>
+
+<section class="cta">
+    <h2>Secure Your Network Today</h2>
+    <p>Deploy in minutes. Scale globally.</p><br>
+    <a class="btn-primary" href="{% url 'signup' %}">Get Started Free</a>
+</section>
+
+<footer>
+    <div><h4>NetGuard</h4><p>NIDs cyber defense.</p></div>
+    <div><h4>Product</h4><a>Features</a><a>Pricing</a></div>
+    <div><h4>Company</h4><a>About</a><a>Contact</a></div>
+    <div><h4>Legal</h4><a>Privacy</a><a>Terms</a></div>
+</footer>
+
+<div class="footer-bottom">© 2026 NIDs. All rights reserved.</div>
+
+</body>
+</html>

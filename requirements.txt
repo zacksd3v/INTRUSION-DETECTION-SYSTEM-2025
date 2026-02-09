@@ -1,5 +1,7 @@
 django
 numpy
 sweetify
-numpy
 joblib
+matplotlib
+pandas
+scikit-learn
